@@ -1,0 +1,13 @@
+h4 {
+  color: yellow;
+  /* border-color: yellow;
+  border-width: thick;
+  border-style: solid; */
+  border: yellow thick dashed;
+}
+
+body {
+  background-image: url(https://images7.alphacoders.com/411/411820.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
