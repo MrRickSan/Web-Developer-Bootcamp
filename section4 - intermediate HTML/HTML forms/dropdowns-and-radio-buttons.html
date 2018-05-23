@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Inputs Demo</title>
+  </head>
+  <body>
+    <form class="login" action="dropdowns-and-radio-buttons.html" method="GET">
+      <p>Do you prefer cats or dogs?</p>
+      <!-- radio -->
+      <label for="dogs">Dogs: </label>
+      <input name="petChoice" type="radio" id="dogs" value="DOGS">
+
+      <label for="cats">Cats: </label>
+      <input name="petChoice" type="radio" id="cats" value="CATS">
+
+      <p>Whats your favorite color?</p>
+      <!-- select -->
+      <select class="dropdown-sample" name="color">
+        <option value="red">Red</option>
+        <option value="yellow">Yellow</option>
+        <option value="purple">Purple</option>
+      </select>
+
+      <!-- textarea -->
+      <textarea name="textarea" rows="8" cols="80"></textarea>
+      <button type="button" name="button">Go!</button>
+    </form>
+  </body>
+</html>
