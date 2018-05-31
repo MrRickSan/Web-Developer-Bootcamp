@@ -1,16 +1,63 @@
-var colors = [
-  'rgb(255, 0, 0)',
-  'rgb(255, 255, 0)',
-  'rgb(0, 255, 0)',
-  'rgb(0, 255, 255)',
-  'rgb(0, 0, 255)',
-  'rgb(255, 0, 255)'
-]
-
-var squares = document.querySelectorAll('.square')
+var numSquares = 6
+var colors = generateRandomColors(numSquares)
+const squares = document.querySelectorAll('.square')
 var pickedColor = pickColor()
-var colorDisplay = document.getElementById('colorDisplay')
-var messageDisplay = document.querySelector('#message')
+const colorDisplay = document.getElementById('colorDisplay')
+const messageDisplay = document.querySelector('#message')
+const h1 = document.querySelector('h1')
+const resetBtn = document.querySelector('#reset')
+const easyBtn = document.querySelector('#easy')
+const hardBtn = document.querySelector('#hard')
+
+easyBtn.addEventListener('click', function () {
+  hardBtn.classList.remove('selected')
+  this.classList.add('selected')
+  numSquares = 3
+  colors = generateRandomColors(numSquares)
+  pickedColor = pickColor()
+  colorDisplay.textContent = pickedColor
+  for (var i = 0; i < squares.length; i++) {
+    if (colors[i]) {
+      squares[i].style.backgroundColor = colors[i]
+    } else {
+      squares[i].style.display = 'none'
+    }
+  }
+  h1.style.backgroundColor = 'steelBlue'
+  messageDisplay.textContent = ''
+})
+
+hardBtn.addEventListener('click', function () {
+  easyBtn.classList.remove('selected')
+  this.classList.add('selected')
+  numSquares = 6
+  colors = generateRandomColors(numSquares)
+  pickedColor = pickColor()
+  colorDisplay.textContent = pickedColor
+  for (var i = 0; i < squares.length; i++) {
+    squares[i].style.backgroundColor = colors[i]
+    squares[i].style.display = 'block'
+  }
+  h1.style.backgroundColor = 'steelBlue'
+  messageDisplay.textContent = ''
+})
+
+resetBtn.addEventListener('click', function () {
+  resetBtn.textContent = 'New Colors'
+  // generate all new Colors
+  colors = generateRandomColors(numSquares)
+  // pick a new random color from array
+  pickedColor = pickColor()
+  // change colorDisplay to match picked color
+  colorDisplay.textContent = pickedColor
+  // change colors of squares
+  for (var i = 0; i < squares.length; i++) {
+    squares[i].style.backgroundColor = colors[i]
+  }
+  // reset h1 background
+  h1.style.backgroundColor = 'steelBlue'
+  messageDisplay.textContent = ''
+})
 
 colorDisplay.textContent = pickedColor
 
@@ -25,7 +72,9 @@ for (var i = 0; i < squares.length; i++) {
     // compare color to pickedColor
     if (clickedColor === pickedColor) {
       messageDisplay.textContent = 'Correct!'
+      resetBtn.textContent = 'Play Again?'
       changeColors(clickedColor)
+      h1.style.backgroundColor = clickedColor
     } else {
       this.style.backgroundColor = '#232323'
       messageDisplay.textContent = 'Try Again'
@@ -41,6 +90,24 @@ function changeColors (color) {
 }
 
 function pickColor () {
-  var random = Math.floor(Math.random() * colors.length)
+  let random = Math.floor(Math.random() * colors.length)
   return colors[random]
+}
+
+function generateRandomColors (num) {
+  // make an array
+  var arr = []
+  // add num random colors to array and return the array
+  for (var i = 0; i < num; i++) {
+    // get random color and push into arr
+    arr.push(randomColor())
+  }
+  return arr
+}
+
+function randomColor () {
+  let red = Math.floor(Math.random() * 256)
+  let green = Math.floor(Math.random() * 256)
+  let blue = Math.floor(Math.random() * 256)
+  return `rgb(${red}, ${green}, ${blue})`
 }
